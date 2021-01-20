@@ -19,7 +19,7 @@ var Products = []Product{
 	Product{Id: 2, Title: "Hello 2", Desc: "Article Description", Image: "Article Content"},
 }
 
-func listProducts(w http.ResponseWriter, r *http.Request) {
+func ListProducts(w http.ResponseWriter, r *http.Request) {
 	stringId := strings.TrimPrefix(r.URL.Path, "/product/")
 	id, err := strconv.Atoi(stringId)
 	if err != nil {
