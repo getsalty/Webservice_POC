@@ -7,37 +7,37 @@ import (
 	"strings"
 )
 
-type Product struct {
-	Id    int    `json:"id"`
-	Title string `json:"title"`
-	Desc  string `json:"desc"`
-	Image string `json:"image"`
+type Continent struct {
+	Name        string `json:"name"`
+	DisplayName string `json:"displayName"`
+	Desc        string `json:"description"`
+	Image       string `json:"image"`
 }
 
-var Products = []Product{
-	Product{Id: 1, Title: "Hello", Desc: "Article Description", Image: "Article Content"},
-	Product{Id: 2, Title: "Hello 2", Desc: "Article Description", Image: "Article Content"},
+var Continents = []Continent{
+	{Name: "1", DisplayName: "Hello", Desc: "Article Description", Image: "Article Content"},
+	{Name: "2", DisplayName: "Hello 2", Desc: "Article Description", Image: "Article Content"},
 }
 
-func ListProducts(w http.ResponseWriter, r *http.Request) {
+func ListContinents(w http.ResponseWriter, r *http.Request) {
 	stringId := strings.TrimPrefix(r.URL.Path, "/product/")
 	id, err := strconv.Atoi(stringId)
 	if err != nil {
-		json.NewEncoder(w).Encode(Products)
+		json.NewEncoder(w).Encode(Continents)
 		return
 	}
 
-	index := findIndexByProductId(id)
+	index := findIndexByContinentId(id)
 
 	if index == -1 {
 		return
 	}
 
-	json.NewEncoder(w).Encode(Products[index])
+	json.NewEncoder(w).Encode(Continents[index])
 }
 
-func findIndexByProductId(id int) int {
-	for i, p := range Products {
+func findIndexByContinentId(id int) int {
+	for i, p := range Continents {
 		if p.Id == id {
 			return i
 		}

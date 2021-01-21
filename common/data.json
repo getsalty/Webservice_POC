@@ -1,0 +1,43 @@
+{
+  continents: [
+
+{
+name:"africa"
+displayName:"Africa"
+description:"This continent has the world's largest and hottest desert!"
+},
+{
+name:"antarctica"
+displayName:"Antarctica"
+description:"A really cold place!"
+},
+{
+name:"asia"
+displayName:"Asia"
+description:"The largest continent!"
+},
+{
+name:"australia"
+displayName:"Australia"
+description:"This is a continent and a country!"
+},
+{
+name:"europe"
+displayName:"Europe"
+description:"This continent has many small countries!"
+},
+{
+name:"north-america"
+displayName:"North America"
+description:"This is where we live"
+},
+{
+name:"south-america"
+displayName:"South America"
+description:"This continent has the largest rain forest in the world!"
+}
+
+
+
+]
+}
