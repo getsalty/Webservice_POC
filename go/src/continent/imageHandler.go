@@ -1,28 +1,25 @@
 package continent
 
 import (
-	"net/http"
+	"io/ioutil"
 	"strings"
-
-	"github.com/getsalty/Webservice_POC/go/src/reader"
 )
 
 var dirPathName = "../common/images/"
 
-func GetImage(w http.ResponseWriter, r *http.Request) {
-
-	name := strings.TrimPrefix(r.URL.Path, "/continent/image/")
+func GetImage(path string) (result []byte) {
+	name := strings.TrimPrefix(path, "/continent/image/")
 
 	if len(name) == 0 {
-		return
+		return result
 	}
 
 	imagePath := (dirPathName + name + ".svg")
 
-	byteValue, err := reader.ReadFile(imagePath)
+	byteValue, err := ioutil.ReadFile(imagePath)
 	if err != nil {
-		return
+		return result
 	}
 
-	w.Write(byteValue)
+	return byteValue
 }

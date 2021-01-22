@@ -2,11 +2,8 @@ package continent
 
 import (
 	"encoding/json"
-	"fmt"
-	"net/http"
+	"io/ioutil"
 	"strings"
-
-	"github.com/getsalty/Webservice_POC/go/src/reader"
 )
 
 var pathName = "../common/data.json"
@@ -22,30 +19,29 @@ type Data struct {
 	Continents []Continent `json:"continents"`
 }
 
-func ListContinents(w http.ResponseWriter, r *http.Request) {
-	byteValue, err := reader.ReadFile(pathName)
+func ListContinents(path string) (result []Continent) {
+	byteValue, err := ioutil.ReadFile(pathName)
 	if err != nil {
-		return
+		return result
 	}
 
-	data := convertToData(byteValue)
+	var data Data
+	json.Unmarshal(byteValue, &data)
 
-	printData(data)
-
-	name := strings.TrimPrefix(r.URL.Path, "/continent/")
+	name := strings.TrimPrefix(path, "/continent/")
 
 	if len(name) == 0 || name == "/continent" {
-		json.NewEncoder(w).Encode(data.Continents)
-		return
+		return data.Continents
 	}
 
 	index := findIndexByName(name, data.Continents)
 
 	if index == -1 {
-		return
+		return result
 	}
 
-	json.NewEncoder(w).Encode(data.Continents[index])
+	data.Continents = []Continent{data.Continents[index]}
+	return data.Continents
 }
 
 func findIndexByName(name string, dataset []Continent) int {
@@ -56,21 +52,4 @@ func findIndexByName(name string, dataset []Continent) int {
 	}
 
 	return -1
-}
-
-func convertToData(byteArray []byte) Data {
-	var result Data
-	json.Unmarshal(byteArray, &result)
-
-	return result
-}
-
-func printData(data Data) {
-	for i, p := range data.Continents {
-		fmt.Println("     ", i, ":")
-		fmt.Println("            Name:", p.Name)
-		fmt.Println("            DisplayName:", p.DisplayName)
-		fmt.Println("            Desc:", p.Desc)
-		fmt.Println("            Image:", p.Image)
-	}
 }
