@@ -12,7 +12,6 @@ type Continent struct {
 	Name        string `json:"name"`
 	DisplayName string `json:"displayName"`
 	Desc        string `json:"description"`
-	Image       string `json:"image"`
 }
 
 type Data struct {
