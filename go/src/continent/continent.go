@@ -19,10 +19,10 @@ type Data struct {
 	Continents []Continent `json:"continents"`
 }
 
-func ListContinents(path string) (result []Continent) {
+func ListContinents(path string, result *[]Continent) {
 	byteValue, err := ioutil.ReadFile(pathName)
 	if err != nil {
-		return result
+		return
 	}
 
 	var data Data
@@ -31,17 +31,18 @@ func ListContinents(path string) (result []Continent) {
 	name := strings.TrimPrefix(path, "/continent/")
 
 	if len(name) == 0 || name == "/continent" {
-		return data.Continents
+		*result = data.Continents
+		return
 	}
 
 	index := findIndexByName(name, data.Continents)
 
 	if index == -1 {
-		return result
+		return
 	}
 
 	data.Continents = []Continent{data.Continents[index]}
-	return data.Continents
+	*result = data.Continents
 }
 
 func findIndexByName(name string, dataset []Continent) int {

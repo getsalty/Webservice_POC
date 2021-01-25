@@ -10,15 +10,17 @@ import (
 
 func main() {
 	http.HandleFunc("/continent", func(w http.ResponseWriter, r *http.Request) {
-		continent := continent.ListContinents(r.URL.Path)
-		if continent != nil {
-			json.NewEncoder(w).Encode(continent)
+		var continentList []continent.Continent
+		continent.ListContinents(r.URL.Path, &continentList)
+		if continentList != nil {
+			json.NewEncoder(w).Encode(continentList)
 		}
 	})
 	http.HandleFunc("/continent/", func(w http.ResponseWriter, r *http.Request) {
-		continent := continent.ListContinents(r.URL.Path)
-		if continent != nil {
-			json.NewEncoder(w).Encode(continent)
+		var continentObject []continent.Continent
+		continent.ListContinents(r.URL.Path, &continentObject)
+		if continentObject != nil {
+			json.NewEncoder(w).Encode(continentObject)
 		}
 	})
 	http.HandleFunc("/continent/image/", func(w http.ResponseWriter, r *http.Request) {
