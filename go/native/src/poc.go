@@ -28,10 +28,10 @@ func main() {
 		}
 	})
 	http.HandleFunc("/continent/image/", func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Add("Content-Type", "application/json")
+		w.Header().Add("Content-Type", "image/svg+xml")
 
 		w.Write(continent.GetImage(r.URL.Path))
 	})
 
-	log.Fatal(http.ListenAndServe(":10000", nil))
+	log.Fatal(http.ListenAndServe(":4000", nil))
 }

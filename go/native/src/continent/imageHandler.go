@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-var dirPathName = "../common/images/"
+var dirPathName = "../../common/images/"
 
 func GetImage(path string) (result []byte) {
 	name := strings.TrimPrefix(path, "/continent/image/")

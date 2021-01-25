@@ -2,13 +2,11 @@ package continent
 
 import (
 	"io/ioutil"
-	"strings"
 )
 
-var dirPathName = "../common/images/"
+var dirPathName = "../../common/images/"
 
-func GetImage(path string) (result []byte) {
-	name := strings.TrimPrefix(path, "/continent/image/")
+func GetImage(name string) (result []byte) {
 
 	if len(name) == 0 {
 		return result

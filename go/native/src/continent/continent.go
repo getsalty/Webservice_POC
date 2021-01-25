@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-var pathName = "../common/data.json"
+var pathName = "../../common/data.json"
 
 type Continent struct {
 	Name        string `json:"name"`

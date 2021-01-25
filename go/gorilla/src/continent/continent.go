@@ -3,10 +3,9 @@ package continent
 import (
 	"encoding/json"
 	"io/ioutil"
-	"strings"
 )
 
-var pathName = "../common/data.json"
+var pathName = "../../common/data.json"
 
 type Continent struct {
 	Name        string `json:"name"`
@@ -18,7 +17,7 @@ type Data struct {
 	Continents []Continent `json:"continents"`
 }
 
-func ListContinents(path string, result *[]Continent) {
+func ListContinents(name string, result *[]Continent) {
 	byteValue, err := ioutil.ReadFile(pathName)
 	if err != nil {
 		return
@@ -27,9 +26,7 @@ func ListContinents(path string, result *[]Continent) {
 	var data Data
 	json.Unmarshal(byteValue, &data)
 
-	name := strings.TrimPrefix(path, "/continent/")
-
-	if len(name) == 0 || name == "/continent" {
+	if len(name) == 0 {
 		*result = data.Continents
 		return
 	}

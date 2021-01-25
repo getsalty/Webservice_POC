@@ -15,5 +15,6 @@ app.get("/continent/:name", (req, res) => {
 });
 
 app.get("/continent/image/:name", (req, res) => {
+    res.type("image/svg+xml");
     res.send(GetImage(req.params.name));
 });
