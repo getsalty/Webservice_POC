@@ -20,7 +20,7 @@ func main() {
 		if continentList != nil {
 			json.NewEncoder(w).Encode(continentList)
 		}
-	})
+	}).Methods("GET")
 
 	router.HandleFunc("/continent/{name}", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Add("Content-Type", "application/json")
@@ -31,14 +31,14 @@ func main() {
 		if continentObject != nil {
 			json.NewEncoder(w).Encode(continentObject)
 		}
-	})
+	}).Methods("GET")
 
 	router.HandleFunc("/continent/image/{name}", func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Type", "image/svg+xml")
+		w.Header().Add("Content-Type", "image/svg+xml")
 		vars := mux.Vars(r)
 
 		w.Write(continent.GetImage(vars["name"]))
-	})
+	}).Methods("GET")
 
 	log.Fatal(http.ListenAndServe(":5000", router))
 }

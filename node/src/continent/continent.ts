@@ -6,7 +6,6 @@ type Continent = {
     name: string;
     displayName: string;
     desc: string;
-    image: string;
 };
 
 type Data = {
