@@ -17,7 +17,7 @@ export const ListContinents = (name: string) => {
 
     const data = JSON.parse(byteValue) as Data;
 
-    if (name.length === 0) {
+    if (!name) {
         return data.continents;
     }
 
