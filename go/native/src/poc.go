@@ -10,11 +10,11 @@ import (
 
 func main() {
 	http.HandleFunc("/continent", func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Add("Content-Type", "application/json")
-
 		var continentList []continent.Continent
 		continent.ListContinents(r.URL.Path, &continentList)
+
 		if continentList != nil {
+			w.Header().Add("Content-Type", "application/json")
 			json.NewEncoder(w).Encode(continentList)
 		}
 	})
