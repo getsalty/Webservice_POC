@@ -13,7 +13,9 @@ type Data = {
     continents: Continent[];
 };
 
-export const ListContinents = (name: string): Continent | Continent[] => {
+export const ListContinents = (
+    name: string
+): Continent | Continent[] | undefined => {
     const byteValue = fs.readFileSync(pathName, "utf8");
 
     const data = JSON.parse(byteValue) as Data;
